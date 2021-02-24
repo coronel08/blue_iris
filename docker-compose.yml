@@ -1,0 +1,31 @@
+# https://www.reddit.com/r/BlueIris/comments/ikr6gh/blueiris_successfully_running_in_a_docker/
+
+version: "3.6"
+# docker network create sec_cam
+
+networks: 
+  sec_cam:
+    external: 
+      name: sec_cam
+  default:
+    driver: bridge
+
+services:
+  blueiris:
+    image: jshridha/blueiris
+    container_name: blueiris
+    restart: unless-stopped
+    networks:
+      - sec_cam
+    privileged: true # Necessary for running the BlueIris install the first time evidently.
+    ports:
+      - 8085:8080
+      - 5900:5900 # VNC Port
+      - 8086:81 # WebUI Port
+    volumes:
+      - ${Dir1}/blueiris:/root/prefix32:rw
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=777
+      - TZ=${TIME_ZONE}
