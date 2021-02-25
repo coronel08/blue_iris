@@ -1,4 +1,5 @@
 # https://www.reddit.com/r/BlueIris/comments/ikr6gh/blueiris_successfully_running_in_a_docker/
+# http://[YourIP]:8086/ui3.htm
 
 version: "3.6"
 # docker network create sec_cam
